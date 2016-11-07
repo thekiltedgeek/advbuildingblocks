@@ -7,11 +7,11 @@ describe "BubbleSort" do
     describe "bubble_sort" do
         
         it "should sort an array of numbers" do
-            expect(bubble_sort([4,2,5,3,1])).to eq([1,2,3,4,5])
+            expect(bubble_sort([1,2,3,5,4])).to eq([1,2,3,4,5])
         end
         
         it "should sort an array of letters" do
-            expect(['f','e','p','a','l']).to eq(['a','e','f','l','p'])
+            expect(bubble_sort(['f','e','p','a','l'])).to eq(['a','e','f','l','p'])
         end
     end
     
