@@ -16,6 +16,8 @@ describe "BubbleSort" do
     end
     
     describe "bubble_sort_by" do
-        it "should sort an array"
+        it "should sort an array using a block" do
+            expect(bubble_sort_by(["hi","hello","hey"]){|left,right| left.length - right.length}).to eq(["hi","hey","hello"])
+        end
     end
 end
