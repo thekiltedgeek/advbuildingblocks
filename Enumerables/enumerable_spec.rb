@@ -26,6 +26,13 @@ describe "Enumerable" do
     end
     
     describe "#my_select" do
+        numbers = [1,2,3,4,5]
+        it "should return an enumerator if no block given" do
+            expect(numbers.my_select).to be_kind_of(Enumerator)
+        end
+        it "should execute block if given" do
+            expect(numbers.select {|x| x.even?}).to eq([2,4])
+        end
     end
     
     describe "#my_all?" do

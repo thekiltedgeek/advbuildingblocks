@@ -16,6 +16,10 @@ module Enumerable
     end
     
     def my_select
+        return to_enum(:my_select) unless block_given?
+        result = []
+        self.my_each {|e| result << yield(e) ==  true}
+        return result
     end
     
     def my_all
