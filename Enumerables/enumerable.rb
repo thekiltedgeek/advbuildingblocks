@@ -1,9 +1,18 @@
 module Enumerable
     
     def my_each
+        return to_enum(:my_each) unless block_given?
+        for i in self
+            yield
+        end
     end
     
     def my_each_with_index
+        return to_enum(:my_each_with_index) unless block_given?
+        for i in (0..self.length - 1)
+            yield(self[i], i)
+        end
+        self
     end
     
     def my_select
