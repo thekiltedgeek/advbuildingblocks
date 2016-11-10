@@ -23,6 +23,7 @@ module Enumerable
     end
     
     def my_all
+        
     end
     
     def my_any
