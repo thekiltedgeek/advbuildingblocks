@@ -126,9 +126,13 @@ describe "Enumerable" do
     end
     
     describe "#my_inject" do
+        it "should execute given block for all elements and return accumulated result" do
+            expect(multiply_els([2,4,5])).to eq(40)
+        end
     end
     
-    def muliplty_els
+    def multiply_els(elements)
+        elements.my_inject(1) {|result, element| result * element}
     end
     
 end

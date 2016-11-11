@@ -67,10 +67,18 @@ module Enumerable
         return result
     end
     
-    def my_inject
+    def my_inject(*args)
+        if args.length == 1
+            memo = args[0]
+        else
+            memo = self[0]
+        end
+        
+        self.each {|e| memo = yield(memo, e)}
+        
+        return memo
     end
     
-    def mulitply_els
-    end
+    
     
 end
