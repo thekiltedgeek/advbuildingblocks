@@ -3,7 +3,7 @@ module Enumerable
     def my_each
         return to_enum(:my_each) unless block_given?
         for i in self
-            yield
+            yield(i)
         end
     end
     
@@ -18,24 +18,53 @@ module Enumerable
     def my_select
         return to_enum(:my_select) unless block_given?
         result = []
-        self.my_each {|e| result << yield(e) ==  true}
+        self.my_each {|e| result << e if yield(e)}
         return result
     end
     
-    def my_all
+    def my_all?
+        if block_given?
+            result = self.length == self.my_select(&Proc.new {}).length
+        else
+            result = self.length == (self.my_select {|obj| obj}).length
+        end
+    end
+    
+    def my_any?
+        if block_given?
+            result = (self.my_select(&Proc.new {})).length > 0
+        else
+            result = (self.my_select {|obj| obj}).length > 0
+        end
+    end
+    
+    def my_none?
+        if block_given?
+            result = (self.my_select(&Proc.new {})).length == 0
+        else
+            result = (self.my_select {|obj| obj}).length == 0
+        end
+    end
+    
+    def my_count(*args)
+        if block_given?
+            result = []
+            self.my_each {|e| result << e if yield(e)}
+            return result.length
+        end
         
-    end
-    
-    def my_any
-    end
-    
-    def my_none
-    end
-    
-    def my_count
+        if args.length == 1
+            return (self.my_select {|e| e == args[0]}).length
+        end
+        
+        return self.length
     end
     
     def my_map
+        return to_enum(:my_map) unless block_given?
+        result = []
+            self.my_each {|e| result << yield(e)}
+        return result
     end
     
     def my_inject
